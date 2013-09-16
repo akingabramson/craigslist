@@ -1,0 +1,27 @@
+
+<%= @user.errors.full_messages if @user.errors %>
+
+
+<form action=<%=users_url%> method="post">
+	<label for="uname">Username</label>
+	<input type="text" name="user[username]" id="uname" value="<%=@user.username%>"><br />
+
+	<label for="password">Password</label>
+	<input type="password" name="user[password]" id="password"><br />
+
+	<label for="confirm">Confirm Password</label>
+	<input type="password" name="user[confirm_password]" id="confirm"><br />
+	<br />
+	<% 3.times do |post_num| %>
+		<% post = @user.posts[post_num]%>
+		<label for="post_title">Post Title</label>
+		<input type="text" id="post_title" name="post[<%=post_num%>][title]" value="<%=post.title if post%>"><br />
+		
+		<label for="post_body">Post Body</label>
+		<textarea id="post_body" name="post[<%=post_num%>][body]"><%= post.body if post%></textarea><br />
+
+	<% end %>
+		
+	<input type="submit" value="Sign Up">
+
+</form>
